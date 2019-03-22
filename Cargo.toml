@@ -1,0 +1,17 @@
+[package]
+name = "grpc-example-service-rs"
+version = "0.1.0"
+authors = ["Dominik Weidenfeld <dominik@weidenfeld.info>"]
+edition = "2018"
+publish = false
+
+[dependencies]
+protobuf = "2.4.0"
+env_logger = "0.6.1"
+grpc = "0.6.1"
+tls-api = "0.1.20"
+tls-api-native-tls = "0.1.20"
+log = "0.4.6"
+
+[build-dependencies]
+protoc-rust-grpc = "0.6.1"

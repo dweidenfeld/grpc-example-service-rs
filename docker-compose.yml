@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  service:
+    image: dweidenfeld/service:dev
+    build:
+      context: .
+      target: build
+    ports:
+      - 50051:50051
+    volumes:
+      - .:/app
+      - /app/target
