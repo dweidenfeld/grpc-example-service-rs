@@ -151,6 +151,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "example-service"
+version = "0.1.0"
+dependencies = [
+ "env_logger 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "grpc 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
+ "protobuf 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "protoc-rust-grpc 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tls-api 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)",
+ "tls-api-native-tls 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -227,19 +240,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "protobuf 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "protobuf-codegen 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "grpc-example-service-rs"
-version = "0.1.0"
-dependencies = [
- "env_logger 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "grpc 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "log 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "protobuf 2.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "protoc-rust-grpc 0.6.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "tls-api 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)",
- "tls-api-native-tls 0.1.20 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]

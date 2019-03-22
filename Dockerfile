@@ -16,15 +16,15 @@ COPY Cargo.toml .
 
 RUN cargo build --release
 
-ENV RUST_LOG=debug
+ENV RUST_LOG="example_service=debug"
 EXPOSE 50051
 CMD ["cargo", "watch", "-x", "'run'"]
 
 
 FROM debian:stretch AS release
 
-COPY --from=build /app/target/release/grpc-example-service-rs /grpc-example-service-rs
+COPY --from=build /app/target/release/example-service /example-service
 
-ENV RUST_LOG=info
+ENV RUST_LOG="example_service=info"
 EXPOSE 50051
-CMD ["/grpc-example-service-rs"]
+CMD ["/example-service"]
