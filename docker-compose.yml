@@ -1,13 +1,18 @@
 version: '3.6'
 
 services:
-  service:
-    image: dweidenfeld/service:dev
+  app:
+    image: github.com/dweidenfeld/app:dev
     build:
       context: .
-      target: build
+      target: dev
     ports:
       - 50051:50051
     volumes:
       - .:/app
-      - /app/target
+      - target:/app/target
+    security_opt:
+      - seccomp=unconfined
+
+volumes:
+  target:

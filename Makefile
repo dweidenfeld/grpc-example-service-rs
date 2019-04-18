@@ -10,26 +10,25 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 # ------------------------------------------------------
-# COMMANDS
+# GLOBAL
 # ------------------------------------------------------
-clean: ## Stop the dev environment and clean old docker containers
-	@$(COMPOSE) down
+test: # TODO
+	$(COMPOSE) run --rm app cargo test
+	$(COMPOSE) run --rm app cargo tarpaulin -v -o Html
 
-install: ## Install dependencies on host system (required for start/test/test-live)
-	@$(COMPOSE) run --rm service cargo build
+test-watch: # TODO
+	$(COMPOSE) run --rm app cargo watch -x test
 
-format: ## Reformat the code on style errors
-	@$(COMPOSE) run --rm service cargo fmt
+clean: # TODO
+	$(COMPOSE) down
+	$(COMPOSE) rm -f
 
-build: ## Rebuild docker images (e.g. on dependency changes)
-	@$(COMPOSE) build
+build: # TODO
+	$(COMPOSE) build
 
-start: ## Start the dev environment
-	@$(COMPOSE) up
+start: # TODO
+	$(COMPOSE) up
 
-test: ## Execute tests
-	@$(COMPOSE) run --rm service cargo test
-#
-test-live: ## Start live testing environment
-	@$(COMPOSE) run --rm service cargo watch -x test
-
+lint: # TODO
+	$(COMPOSE) run --rm app cargo fmt
+	$(COMPOSE) run --rm app cargo clippy
