@@ -1,13 +1,14 @@
 #[macro_use]
 extern crate log;
 
+mod example_service;
 mod gen;
 
+use crate::example_service::ExampleServiceImpl;
+use crate::gen::example_service_grpc::ExampleServiceServer;
 use env_logger;
-use gen::example_service::*;
-use gen::example_service_grpc::*;
-use grpc::{RequestOptions, SingleResponse};
 
+#[cfg_attr(tarpaulin, skip)]
 fn main() {
     env_logger::init();
 
@@ -19,37 +20,8 @@ fn main() {
     ctrlc::set_handler(move || {
         info!("exiting...");
         std::process::exit(0);
-    }).expect("SIGTERM handler");
+    })
+    .expect("SIGTERM handler");
     info!("service started on {}", server.local_addr());
     std::thread::park();
-}
-
-struct ExampleServiceImpl;
-
-impl ExampleService for ExampleServiceImpl {
-    fn hello(&self, _o: RequestOptions, req: HelloRequest) -> SingleResponse<HelloResponse> {
-        let mut resp = HelloResponse::new();
-        resp.set_message(format!("Hello {}", req.message));
-
-        SingleResponse::completed(resp)
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn hello_success() {
-        let service = ExampleServiceImpl;
-
-        let mut req = HelloRequest::new();
-        req.set_message("my message".to_string());
-
-        let resp = service
-            .hello(RequestOptions::new(), req)
-            .wait_drop_metadata()
-            .unwrap();
-        assert_eq!("Hello my message", resp.get_message());
-    }
 }

@@ -4,3 +4,4 @@
 *.iml
 /src/gen
 !/src/gen/mod.rs
+tarpaulin-report.html
