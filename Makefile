@@ -4,7 +4,7 @@
 # VARIABLES
 # ------------------------------------------------------
 DOCKER=docker
-COMPOSE=docker-compose -f docker-compose.yml
+COMPOSE=docker-compose
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -14,7 +14,7 @@ help:
 # ------------------------------------------------------
 test: # TODO
 	$(COMPOSE) run --rm app cargo test
-	$(COMPOSE) run --rm app cargo tarpaulin -v -o Html
+#	$(COMPOSE) run --rm app cargo tarpaulin -v -o Html
 
 test-watch: # TODO
 	$(COMPOSE) run --rm app cargo watch -x test

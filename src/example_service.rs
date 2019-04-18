@@ -17,9 +17,9 @@ impl ExampleService for ExampleServiceImpl {
 mod tests {
     use super::*;
     use crate::gen::example_service_grpc::{ExampleServiceClient, ExampleServiceServer};
+    use grpc::{ClientStub, Server};
     use rand::{thread_rng, Rng};
     use std::sync::Arc;
-    use grpc::{ClientStub, Server};
 
     fn setup() -> (Server, ExampleServiceClient) {
         let port = thread_rng().gen_range(49152, 65535);
@@ -29,11 +29,9 @@ mod tests {
         server.add_service(ExampleServiceServer::new_service_def(ExampleServiceImpl));
         let server = server.build().expect("server");
 
-        let grpc_client = Arc::new(grpc::Client::new_plain(
-            "127.0.0.1",
-            port,
-            Default::default(),
-        ).expect("grpc client"));
+        let grpc_client = Arc::new(
+            grpc::Client::new_plain("127.0.0.1", port, Default::default()).expect("grpc client"),
+        );
 
         (server, ExampleServiceClient::with_client(grpc_client))
     }
